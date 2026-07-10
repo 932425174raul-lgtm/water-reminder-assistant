@@ -2,6 +2,15 @@
 
 一个 macOS/Windows 桌面小助手，面向需要每天补水 2000ml、但容易忘记喝水的人。
 
+## 下载
+
+请从 [v1.0.0 Release](https://github.com/932425174raul-lgtm/water-reminder-assistant/releases/tag/v1.0.0) 下载对应系统的安装包：
+
+- [macOS Apple Silicon（M1/M2/M3/M4）DMG](https://github.com/932425174raul-lgtm/water-reminder-assistant/releases/download/v1.0.0/water-reminder-assistant-1.0.0-macos-arm64.dmg)
+- [Windows x64 EXE](https://github.com/932425174raul-lgtm/water-reminder-assistant/releases/download/v1.0.0/water-reminder-assistant-1.0.0-windows-x64-setup.exe)
+
+macOS 使用说明见 [使用说明.html](./使用说明.html)，Windows 使用说明见 [Windows使用说明.html](./Windows使用说明.html)。
+
 ## 做什么
 
 - Electron 主进程在后台按间隔倒计时；主窗口关闭后会收进系统托盘，提醒仍然继续。
