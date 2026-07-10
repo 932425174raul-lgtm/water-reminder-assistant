@@ -11,6 +11,8 @@
 
 macOS 使用说明见 [使用说明.html](./使用说明.html)，Windows 使用说明见 [Windows使用说明.html](./Windows使用说明.html)。
 
+正式的签名、公证与自动发布配置见 [RELEASE.md](./RELEASE.md)。
+
 ## 做什么
 
 - Electron 主进程在后台按间隔倒计时；主窗口关闭后会收进系统托盘，提醒仍然继续。

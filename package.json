@@ -8,14 +8,32 @@
     "start": "electron .",
     "check": "node --check app.js && node --check main.cjs && node --check preload.cjs && node --check reminder.js && node --check widget.js && node --check edge.js",
     "dist": "electron-builder --mac dmg --arm64",
-    "dist:win": "electron-builder --win nsis --x64"
+    "dist:win": "electron-builder --win nsis --x64",
+    "release:mac:build": "npm run check && node scripts/release-preflight.cjs mac build && electron-builder --mac dmg --arm64",
+    "release:win:build": "npm run check && node scripts/release-preflight.cjs win build && electron-builder --win nsis --x64",
+    "release:mac": "npm run check && node scripts/release-preflight.cjs mac publish && electron-builder --mac dmg --arm64 --publish always",
+    "release:win": "npm run check && node scripts/release-preflight.cjs win publish && electron-builder --win nsis --x64 --publish always"
   },
   "build": {
     "appId": "com.songjinzhao.waterreminder",
     "productName": "喝水小助手",
     "asar": true,
+    "artifactName": "water-reminder-assistant-${version}-${os}-${arch}.${ext}",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "932425174raul-lgtm",
+        "repo": "water-reminder-assistant",
+        "releaseType": "release"
+      }
+    ],
     "mac": {
       "category": "public.app-category.healthcare-fitness",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "notarize": true,
       "target": [
         {
           "target": "dmg",
