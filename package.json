@@ -1,0 +1,49 @@
+{
+  "name": "water-reminder-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "安静常驻的喝水桌面小助手",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check app.js && node --check main.cjs && node --check preload.cjs && node --check reminder.js && node --check widget.js && node --check edge.js",
+    "dist": "electron-builder --mac dmg --arm64",
+    "dist:win": "electron-builder --win nsis --x64"
+  },
+  "build": {
+    "appId": "com.songjinzhao.waterreminder",
+    "productName": "喝水小助手",
+    "asar": true,
+    "mac": {
+      "category": "public.app-category.healthcare-fitness",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "喝水小助手"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^43.1.0",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./widget.css" />
+    <title>喝水小助手</title>
+  </head>
+  <body>
+    <main class="widget">
+      <span class="mascot-wrap" aria-hidden="true">
+        <svg class="mascot-ring" viewBox="0 0 88 88"><circle class="mascot-ring-bg" cx="44" cy="44" r="38" /><circle class="mascot-ring-fill" id="mascotRing" cx="44" cy="44" r="38" /></svg>
+        <img id="mascot" src="./assets/water-spirit.png" alt="" />
+        <span class="mascot-progress"><b id="mascotAmount">0ml</b><small id="mascotTarget">/ 2000ml</small></span>
+      </span>
+      <button class="progress" id="openApp" type="button" aria-label="打开喝水小助手">
+        <span class="widget-copy"><b>今日喝水</b><i id="widgetAmount">0 / 2000ml</i><small id="widgetHint">还差 2000ml</small></span>
+        <span class="bar"><i id="widgetBar"></i></span>
+      </button>
+      <button class="mode-toggle" id="modeToggle" type="button" title="展开胶囊" aria-label="展开胶囊">
+        <svg viewBox="0 0 24 24" aria-hidden="true"></svg>
+      </button>
+      <button class="quick-log" id="quickLog" type="button" title="记录一杯水" aria-label="记录一杯水">+1</button>
+    </main>
+    <script src="./widget.js"></script>
+  </body>
+</html>

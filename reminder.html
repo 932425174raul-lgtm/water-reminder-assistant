@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./reminder.css" />
+    <title>喝水提醒</title>
+  </head>
+  <body>
+    <main class="capsule">
+      <p>喝水小助手</p>
+      <h1 id="reminderTitle">该喝一杯水了</h1>
+      <p class="health-note" id="reminderNote">先补一杯，让身体慢慢回到舒服的节奏。</p>
+      <div class="actions">
+        <button class="primary" data-action="log">我喝了</button>
+        <button data-action="snooze">5 分钟后</button>
+        <button class="skip" data-action="skip">跳过本次</button>
+      </div>
+    </main>
+    <script src="./reminder.js"></script>
+  </body>
+</html>

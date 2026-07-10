@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>喝水小助手</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar" aria-label="今日喝水状态">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 4c6 8 13 17 13 27 0 8-6 13-13 13S11 39 11 31C11 21 18 12 24 4Z" /><path d="M18 31c0 4 3 7 7 7" /></svg>
+          </span>
+          <div>
+            <h1>喝水小助手</h1>
+            <p id="todayLabel">今日</p>
+          </div>
+        </div>
+        <div class="timer-strip">
+          <div class="theme-switch" role="group" aria-label="界面主题">
+            <button class="theme-option is-active" data-theme="light" type="button">浅色</button>
+            <button class="theme-option" data-theme="dark" type="button">暗黑</button>
+          </div>
+          <button class="icon-button" id="trayButton" type="button" title="收进系统托盘" aria-label="收进系统托盘">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z" /><path d="M9 8h6M9 12h6M9 16h4" /></svg>
+          </button>
+          <button class="primary-action" id="toggleReminder" type="button"><span id="toggleLabel">开始今日守护</span></button>
+        </div>
+      </header>
+
+      <section class="hero-band" aria-label="一杯水行动">
+        <div class="hero-copy">
+          <p class="hero-kicker" id="mainGap">喝第一杯水</p>
+          <h2>今天，<br /><em>喝够 <span id="targetCupText">4</span> 杯水</em></h2>
+          <p class="hero-note" id="goalCopy">目标 2000ml，按 500ml 一杯，今天喝 4 杯就好。</p>
+          <div class="cup-row" id="cupRow" aria-label="今日饮水杯数"></div>
+          <div class="quick-actions">
+            <button class="primary-action large" id="logCup" type="button">我喝了一杯 <span id="cupAmountLabel">500ml</span></button>
+            <button class="secondary-action" id="logHalfCup" type="button">先喝半杯</button>
+          </div>
+        </div>
+        <div class="hero-progress" aria-label="今日饮水量">
+          <div class="progress-ring">
+            <svg viewBox="0 0 160 160" aria-hidden="true">
+              <circle class="ring-bg" cx="80" cy="80" r="66"></circle>
+              <circle class="ring-main" id="progressArc" cx="80" cy="80" r="66"></circle>
+            </svg>
+            <div class="ring-copy"><strong id="waterValue">0</strong><span>ml 白水</span></div>
+          </div>
+          <p id="progressCaption">0 / 4 杯</p>
+        </div>
+      </section>
+
+      <section class="setup-band" aria-label="提醒设置">
+        <div class="setup-intro">
+          <h2>让提醒跟得上今天</h2>
+          <p>不用每天重新设闹钟。开启后，助手会在清醒时段轻轻提醒；忙的时候随手延后。</p>
+        </div>
+        <div class="rule-grid">
+          <label><span>每日目标</span><strong><input id="targetInput" type="number" min="500" max="5000" step="100" value="2000" /> ml</strong></label>
+          <label><span>常用杯容量</span><strong><input id="cupSizeInput" type="number" min="150" max="1000" step="50" value="500" /> ml</strong></label>
+          <label><span>提醒间隔</span><strong><input id="intervalInput" type="number" min="15" max="180" step="5" value="45" /> 分钟</strong></label>
+          <label><span>清醒时段</span><strong class="time-pair"><input id="startTime" type="time" value="08:00" /><i>至</i><input id="endTime" type="time" value="22:30" /></strong></label>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="action-board">
+          <div class="section-head">
+            <div><p class="eyebrow">低门槛记录</p><h2>喝了，就点一下</h2></div>
+            <span class="muted" id="nextTime">提醒未开启</span>
+          </div>
+          <div class="cup-checklist" id="cupChecklist"></div>
+          <div class="manual-row">
+            <label>补记 <input id="customAmount" type="number" min="50" max="2000" step="50" placeholder="ml" /></label>
+            <button class="secondary-action" id="logCustom" type="button">记一笔</button>
+          </div>
+          <p class="helper-text">不需要精确到每一口。用你的常用杯，完成一次就算一次。</p>
+        </div>
+
+        <aside class="side-panel" aria-label="提醒与记录">
+          <section class="reminder-card">
+            <div class="section-head"><h2>下一次提醒</h2><button class="icon-button small" id="remindNow" type="button" title="现在提醒" aria-label="现在提醒"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" /><path d="M13 6l6 6-6 6" /></svg></button></div>
+            <div class="countdown" id="countdown">--:--</div>
+            <p class="reminder-note">提醒安静地停在屏幕角落。<span id="snoozeCount">0</span> 次延后</p>
+          </section>
+          <section class="history-card">
+            <div class="section-head"><h2>今日记录</h2><button class="text-button" id="resetToday" type="button">清空</button></div>
+            <div class="log-list" id="logList"></div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="drink-note-band" aria-label="饮品备注">
+        <div><p class="eyebrow">可选备注</p><h2>今天喝了别的饮品？</h2><p>可以记下来，但它们不替代喝水打卡，也不参与奖励计算。</p></div>
+        <div class="drink-grid" id="drinkGrid"></div>
+      </section>
+
+      <section class="summary-band" aria-label="喝水总结">
+        <div class="section-head summary-head">
+          <div><p class="eyebrow">长期记录</p><h2>喝水总结</h2></div>
+          <button class="secondary-action" id="exportExcel" type="button">导出 Excel</button>
+        </div>
+        <div class="summary-tabs" role="tablist" aria-label="总结周期">
+          <button class="summary-tab is-active" data-summary-period="week" type="button">本周</button>
+          <button class="summary-tab" data-summary-period="month" type="button">本月</button>
+          <button class="summary-tab" data-summary-period="quarter" type="button">本季度</button>
+          <button class="summary-tab" data-summary-period="year" type="button">本年</button>
+        </div>
+        <div class="summary-metrics" id="summaryMetrics"></div>
+        <div class="summary-grid" id="summaryGrid"></div>
+        <div class="summary-legend"><span><i class="legend-done"></i>达成</span><span><i class="legend-missed"></i>未达成</span><span><i class="legend-future"></i>未到日期</span><span id="streakLabel">连续 0 天</span></div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
